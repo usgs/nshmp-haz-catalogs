@@ -1,5 +1,3 @@
-This repository hosts the catalogs used in development of the USGS National Seismic Hazard Model. Please see the [wiki](https://github.com/cmueller-usgs/nshmp-haz-catalogs/wiki) for name conventions.
-
 ## National Seismic Hazard Model (NSHM) Earthquake Catalogs
 
 With each release of the NSHM, a variety of earthquake catalogs are compiled and subsequently processed to remove duplicate, dependent (foreshocks and aftershocks), and anthropogenic events. Gridded seismicity source models in hazard calculations are derived from final, filtered catalogs. The tables below outline the processing steps applied to each catalog available in this repository.
