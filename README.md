@@ -36,6 +36,6 @@ wmm.cc  |WUS |❌|❌|❌|3
 WUS = Western US  
 CEUS = Central & Eastern US  
 
-1 = Explosion and mining related events included  
+1 = Explosions and mining-related events included  
 2 = mbLg ≥ 3  
 3 = Mw ≥ 4  
