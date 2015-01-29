@@ -26,10 +26,10 @@ Details of the earthquake catalogs used in constructing the 2008 NSHM, by file.
 
 Name | Region | Duplicates | Aftershocks | Anthropogenic | Notes
 :----|:------:|:----------:|:-----------:|:-------------:|:----:
-emb.c_nd|CEUS|❌|✅|✅|1
-emb.cc  |CEUS|❌|❌|❌|2
-wmm.c_nd|WUS |❌|✅|✅|1
-wmm.cc  |WUS |❌|❌|❌|3
+[emb.c_nd](https://github.com/usgs/nshmp-haz-catalogs/raw/master/2008/2008_emb.c_nd.txt)|CEUS|❌|✅|✅|1
+[emb.cc](https://github.com/usgs/nshmp-haz-catalogs/raw/master/2008/2008_emb.cc.txt)  |CEUS|❌|❌|❌|2
+[wmm.c_nd](https://github.com/usgs/nshmp-haz-catalogs/raw/master/2008/2008_wmm.c_nd.txt)|WUS |❌|✅|✅|1
+[wmm.cc](https://github.com/usgs/nshmp-haz-catalogs/raw/master/2008/2008_wmm.cc.txt)  |WUS |❌|❌|❌|3
 
 ✅ = events included  
 ❌ = events deleted  
