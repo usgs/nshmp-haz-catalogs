@@ -8,7 +8,7 @@ Details of the earthquake catalogs used in constructing the 2014 NSHM, by file. 
 
 Name | Region | Duplicate | Dependent | Anthro. M&E | Anthro. PFI
 :----|:------:|:---------:|:---------:|:-----------:|:----------:
-2014_emm.c2|CEUS|❌|✅|❌|✅
+[2014_emm.c2](https://raw.githubusercontent.com/usgs/nshmp-haz-catalogs/master/2014/2014_emm.c2.txt)|CEUS|❌|✅|❌|✅
 2014_emm.c3|CEUS|❌|❌|❌|✅
 2014_emm.c4|CEUS|❌|❌|❌|❌
 2014_wmm.c2|WUS |❌|✅|❌|✅
