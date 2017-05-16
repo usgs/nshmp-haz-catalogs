@@ -67,7 +67,7 @@ void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct cata
     magv=0.0;
     write_asum_to_file(seisr, outf, cat, magv);
 // M0, 10^a, un-smoothed 
-    write_unsmoothed_asum_to_file(seisr, outf);
+//    write_unsmoothed_asum_to_file(seisr, outf);
 
 // M3.0, 10^(a-3.0b) values
 /*

@@ -29,6 +29,9 @@ else
   run_variableCompl=0
 fi
 
+# SMOOTHING
+run_smoothing=1
+
 #
 mag_min_pr=`echo $mag_min | sed 's/\./p/'`
 end_yr=2012
@@ -39,17 +42,13 @@ summf=summ_smooth_params.txt
 cat_gaps_f=lst_catalog_gaps.txt
 #nmref=adRN${nnum}_cumul_Mmin${mag_min_pr}
 
-# runs
-run_smoothing=1
-run_plotting=1
-
 # write the parameter file
 if (( $run_smoothing )); then
 echo "# source boundaries" > param_smoothing.txt
-echo "Min_Lat=24.6 " >> param_smoothing.txt
-echo "Max_Lat=50.0" >> param_smoothing.txt
-echo "Min_Lon=-115.0" >> param_smoothing.txt
-echo "Max_Lon=-65.0" >> param_smoothing.txt
+echo "Min_Lat=23.0 " >> param_smoothing.txt
+echo "Max_Lat=53.0" >> param_smoothing.txt
+echo "Min_Lon=-116.0" >> param_smoothing.txt
+echo "Max_Lon=-60.0" >> param_smoothing.txt
 echo "Inc_Lat=0.1" >> param_smoothing.txt
 echo "Inc_Lon=0.1" >> param_smoothing.txt
 echo "# completeness levels - no adjusting for these calculations" >> param_smoothing.txt
@@ -105,50 +104,9 @@ calc_agrid_seis_rates $paramf $paramf_format $summf
 # save files
 outd=dir_${nmref}
 mkdir $outd
-#mv summ*txt agrdM?.out $inf $outf cat1.tmp selected_eqs*.dat log_${nmref}.tmp $outd
-#mv $summf agrd*.out param_*.in selected_eqs*.dat log_${nmref}.tmp $outd
 mv $summf agrd*.out param_*.in selected_eqs*.dat $outd
-#mv template_agrd_cumul_sigmin_CA.in $outd
 cp $catf $outd
 echo "Saved files to $outd"
 fi
 # end of run_smoothing
 
-# change to output directory, make ascii-formatted forecasts and plots
-if (( $run_plotting )); then
-outd=dir_${nmref}
-cd $outd
-filein=agrd_${nmref}_M0.out
-echo $filein
-fileout=${filein}.txt
-bin2xyzX.v2 $filein $fileout << eof
-24.6 50.0
--115.0 -65.0
-.1 .1
-0
-eof
-# plotting
-#cp ../misc/rates_*cpt .
-cp ~/ref_files/cptfiles/rates_agrid_M0.cpt .
-awk 'NR>1{print $0}' $fileout > t.tmp
-rm $fileout
-agridf=t.tmp
-echo "Cumulative rates of M0+, Mmin=${mag_min}, adaptive-R, N-${nnum}" > text1.txt
-minlon=-115
-#maxlon=-100
-maxlon=-65
-#minlat=24.6
-#minlat=28.0
-minlat=24.6
-#maxlat=50.0
-maxlat=50.0
-#cptf=rates_agrid_001M0.cpt
-cptf=rates_agrid_M0.cpt
-echo plot_agrid_boundaries.gmt $agridf $minlon $maxlon $minlat $maxlat text1.txt $cptf
-plot_agrid_boundaries.gmt $agridf $minlon $maxlon $minlat $maxlat text1.txt $cptf
-mv pl_agrid.ps pl_agrid_M0_fm_M${mag_min_pr}_adRN${nnum}_cumul.ps
-#rm t.tmp
-
-echo "Made plot, pl_agrid_M4_adRN${nnum}_cumul.ps"
-echo "in directory, $outd"
-fi
