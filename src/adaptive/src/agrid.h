@@ -1,7 +1,7 @@
 #define BUFFLEN 300
 #define CLEVELS 10
-#define NV 175000
-#define NEQ 10000
+#define NV 170000
+#define NEQ 15000
 #define NNUM 10
 #define MAXCHAR 128
 #define BUFFLEN 300
@@ -20,8 +20,6 @@
   struct poly {
     int npts;
     int nyears;
-    int year_start, year_end;
-    float mag_Mc;
     float lon[NPP], lat[NPP];
   };
 
@@ -29,7 +27,8 @@
   struct all_poly {
     int npoly;
     struct poly elem[NPPOLY];
-  } ;
+  }
+  ;
 
 struct compl_levels {
   int variableCompleteness;
@@ -38,7 +37,6 @@ struct compl_levels {
   int nlevels;
   int end_yr;
   int yr_comp[CLEVELS];
-  int variableMc;
   float mag_comp[CLEVELS];
   float dMag;
   char completenessFile[200];
@@ -47,7 +45,6 @@ struct compl_levels {
   int yrCompl_arr[NV];
   float magCompl_arr[NV];
   float lon_arr[NV], lat_arr[NV];
-  char variableMc_File[200];
   struct all_poly polygons;
 } ;
 

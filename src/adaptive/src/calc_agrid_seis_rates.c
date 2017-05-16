@@ -41,6 +41,7 @@ int main (int argc, char *argv[])
 // initialize parameters, then open and read parameters file
   initialize_params(&cat_compl, &region, &cat, &smoothing_params);
   if( ! read_params_new_old(paramf, &cat_compl, &region, &cat, &smoothing_params, outf,fnew) ) exit(1);
+fprintf(stderr,"outfnm: %s\n", outf);
   write_params(&cat_compl, &region, &cat, &smoothing_params, outf);
   write_params_to_file(summf, &cat_compl, &region, &cat, &smoothing_params, outf);
   if ( stop_run == 1 ) exit(1);

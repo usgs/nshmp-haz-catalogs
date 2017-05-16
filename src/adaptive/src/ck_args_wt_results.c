@@ -53,44 +53,44 @@ void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct cata
 {
   int cnt;
   float magv;
-  float tmpsum=0.0, tmpsum3=0.0, tmpsum5=0.0;
+  float tmpsum=0.0;
 
 // quick check of earthquake numbers
   for (cnt=0; cnt<seisr->nv; cnt++) {
     tmpsum=tmpsum+seisr->asum[cnt]*7;
-    tmpsum3=tmpsum3+seisr->asum[cnt]*7*powf(10,-cat->bval*3.0);
-    tmpsum5=tmpsum5+seisr->asum[cnt]*7*powf(10,-cat->bval*5.0);
   }
-  fprintf(stderr,"No. eqs in 7 years: %.4f (M0+); %.4f (M3+); %.4f (M5+) \n", tmpsum, tmpsum3, tmpsum5);
+  fprintf(stderr,"tmpsum (no. M0+ eqs in 7 years) = %.4f\n", tmpsum);
 
 // if a smoothed seismicity model is generated, output results at M0(10^a), M4, M5 and unsmoothed model
   if ( smp->apply_sm ) {
 // M0, 10^a values
     magv=0.0;
     write_asum_to_file(seisr, outf, cat, magv);
-// M2.7, 10^(a-2.7b) values
-    magv=2.7;
-    write_asum_to_file(seisr, outf, cat, magv);
-// M3.0, 10^(a-3.0b) values
-    magv=3.0;
-    write_asum_to_file(seisr, outf, cat, magv);
-// M3.5, 10^(a-3.5b) values
-    magv=3.5;
-    write_asum_to_file(seisr, outf, cat, magv);
-// M4, 10^(a-4b) values
-    magv=4.0;
-    write_asum_to_file(seisr, outf, cat, magv);
-// M4.5, 10^(a-4.5b) values
-    magv=4.5;
-    write_asum_to_file(seisr, outf, cat, magv);
-
-// M5, 10^(a-5b) values
-    magv=5.0;
-    write_asum_to_file(seisr, outf, cat, magv);
 // M0, 10^a, un-smoothed 
     write_unsmoothed_asum_to_file(seisr, outf);
+
+// M3.0, 10^(a-3.0b) values
+/*
+*    magv=3.0;
+*    write_asum_to_file(seisr, outf, cat, magv);
+// M3.5, 10^(a-3.5b) values
+*    magv=3.5;
+*    write_asum_to_file(seisr, outf, cat, magv);
+// M4, 10^(a-4b) values
+*    magv=4.0;
+*    write_asum_to_file(seisr, outf, cat, magv);
+// M4.5, 10^(a-4.5b) values
+*    magv=4.5;
+*    write_asum_to_file(seisr, outf, cat, magv);
+*
+// M5, 10^(a-5b) values
+*    magv=5.0;
+*    write_asum_to_file(seisr, outf, cat, magv);
+*/    
   }
   else {
+    magv=0.0;
+    write_asum_to_file(seisr, outf, cat, magv);
     magv=cat->minMag;
     write_asum_to_file(seisr, outf, cat, magv);
   }

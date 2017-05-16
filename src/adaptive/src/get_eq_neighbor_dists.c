@@ -15,13 +15,14 @@ int compare_floats ( const void * a, const void * b) {
 void get_eq_neighbor_dists(struct eqcat* catn)
 /*--------------------------------------------------------------------------*/
 {
-  int cnt, cnt1, cnt2, ncnt, narr;
+//  int cnt, cnt1, cnt2, ncnt, narr;
+  int cnt, cnt1, cnt2, ncnt;
 //  int ord[NEQ];
   float lon1, lat1, lon2, lat2, dist, az, baz;
   float distarr[NEQ];
 
 // sorting array has one less element than earthquake list array
-  narr=catn->nv-1;
+//  narr=catn->nv-1;
   for(cnt=0; cnt<NEQ; cnt++) distarr[cnt]=0.0;
 
 // loop over all pairs of stations, get distances and sort for the 10-nearest events

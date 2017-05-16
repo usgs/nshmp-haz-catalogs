@@ -9,12 +9,13 @@ void write_asum_to_file(struct rates* seisr, char *fbasenm, struct catalog * cat
 /*--------------------------------------------------------------------------*/
 { 
   FILE *fpout;
-  int nsrc, cnt, ierr, out2=0;
+//  int nsrc, cnt, ierr, out2=0;
+  int nsrc, cnt, ierr;
+//  int nsrc, cnt;
   float diffth=1e-1;
   float asum[NV];
-  char fileout[200], fileout2[200];
+  char fileout[200];
 //  struct header headr;
-
 
 // get rate array and naming based on magnitude input values
   nsrc=seisr->nv;
@@ -23,6 +24,16 @@ void write_asum_to_file(struct rates* seisr, char *fbasenm, struct catalog * cat
     sprintf(fileout,"%s_M0.out", fbasenm);
     fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
     for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt];
+  }
+  else if ( fabsf(mag-2.5)<diffth ) {
+    sprintf(fileout,"%s_M2p5.out", fbasenm);
+    fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
+    for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt]*powf(10,-(catv->bval)*mag);
+  }
+  else if ( fabsf(mag-2.7)<diffth ) {
+    sprintf(fileout,"%s_M2p7.out", fbasenm);
+    fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
+    for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt]*powf(10,-(catv->bval)*mag);
   }
   else if ( fabsf(mag-3.0)<diffth ) {
     sprintf(fileout,"%s_M3.out", fbasenm);
@@ -39,6 +50,11 @@ void write_asum_to_file(struct rates* seisr, char *fbasenm, struct catalog * cat
     fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
     for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt]*powf(10,-(catv->bval)*mag);
   }
+  else if ( fabsf(mag-4.7)<diffth ) {
+    sprintf(fileout,"%s_M4p7.out", fbasenm);
+    fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
+    for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt]*powf(10,-(catv->bval)*mag);
+  }
   else if ( fabsf(mag-4.5)<diffth ) {
     sprintf(fileout,"%s_M4p5.out", fbasenm);
     fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
@@ -50,14 +66,10 @@ void write_asum_to_file(struct rates* seisr, char *fbasenm, struct catalog * cat
     for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt]*powf(10,-(catv->bval)*mag);
   }
   else {
-    out2=1;
-//    sprintf(fileout,"%s_M0.out", fbasenm);
-//    fprintf(stderr,"No option for M%.2f printing, writing to M0 file - %s\n", mag, fileout);
-//    for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt];
-// also precision to two decimal places
-    sprintf(fileout,"%s_M%.2f.out", fbasenm, mag);
-    fprintf(stderr,"Printing M%.2f values to file - %s\n", mag, fileout);
-    for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt]*powf(10,-(catv->bval)*mag);
+//    out2=1;
+    sprintf(fileout,"%s_M0.out", fbasenm);
+    fprintf(stderr,"No option for M%.2f printing, writing to M0 file - %s\n", mag, fileout);
+    for(cnt=0; cnt<nsrc; cnt++) asum[cnt]=seisr->asum[cnt];
   }
 
 
@@ -76,6 +88,7 @@ void write_unsmoothed_asum_to_file(struct rates* seisr, char *fbasenm)
 /*--------------------------------------------------------------------------*/
 { 
   FILE *fpout;
+//  int nsrc, cnt, ierr;
   int nsrc, cnt, ierr;
   float asum[NV];
   char fileout[200];

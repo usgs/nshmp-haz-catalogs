@@ -36,11 +36,9 @@ void convert_eq_nos_rates(struct rates* seisr, struct compl_levels* compl, struc
 //if (cnt==29375) fprintf(stderr,"asum smoothed (M4+), %f \n", seisr->asum[cnt]);
 // convert from (cumulative) counts per cell to rates
       isum=isum+seisr->asum[cnt];
-// convert to log(rate)(M=0), cumulative - this is now done in smooth_seis_rates.c
-//      seisr->asum[cnt]=log10f(seisr->asum[cnt]) + cat->bval*cat->minMag;
-//      seisr->asum_noSm[cnt]=log10f(seisr->asum_noSm[cnt]) + cat->bval*cat->minMag;
-      seisr->asum[cnt]=log10f(seisr->asum[cnt]);
-      seisr->asum_noSm[cnt]=log10f(seisr->asum_noSm[cnt]);
+// convert to log(rate)(M=0), cumulative
+      seisr->asum[cnt]=log10f(seisr->asum[cnt]) + cat->bval*cat->minMag;
+      seisr->asum_noSm[cnt]=log10f(seisr->asum_noSm[cnt]) + cat->bval*cat->minMag;
 // convert cumulative to incremental rates, if specified
       seisr->asum[cnt]=seisr->asum[cnt]+fac;
       seisr->asum_noSm[cnt]=seisr->asum_noSm[cnt]+fac;

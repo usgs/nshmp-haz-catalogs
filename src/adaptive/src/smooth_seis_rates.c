@@ -61,7 +61,7 @@ float check_earthquake_catalog_gaps(struct eqcat* eqcatp, struct compl_levels* c
       plat[cnt1]=cat_compp->polygons.elem[cnt].lat[cnt1];
     }
     if ( lxyint_(&eqlon,&eqlat,plon,plat,&np) ) { 
-//      fprintf(stderr,"EQ-reduced-time-for-rate: %.3f %.3f %d %d %d %f %d\n", eqlon, eqlat, eqyr, eqmon, eqday, eqmag, eqlineno);
+      fprintf(stderr,"EQ-reduced-time-for-rate: %.3f %.3f %d %d %d %f %d\n", eqlon, eqlat, eqyr, eqmon, eqday, eqmag, eqlineno);
       return nyrs;
     }
   }
@@ -75,15 +75,15 @@ float calc_seis_rate(struct smoothp* smpp, struct eqcat* eqcatp, struct compl_le
 /*--------------------------------------------------------------------------*/
 {
   int cnt;
-  float num_fac, denom_fac, rate_fac, ratev, fac_exp, mag_Mc;
-  float bvalue, beta, n_eff, mag_eq, denom_mod;
-  float exp_rate;
+  float num_fac, denom_fac, rate_fac, ratev, fac_exp;
+//  float bvalue, beta, n_eff, mag_eq, denom_mod;
+  float bvalue, beta, n_eff, denom_mod;
+//  float bvalue, beta, n_eff, denom_mod;
 
 // 
   bvalue=cat_parp->bval;
   beta=2.303*bvalue;
-  mag_eq=eqcatp->mag[eqno];
-  mag_Mc=eqcatp->mag_Mc[eqno];
+//  mag_eq=eqcatp->mag[eqno];
 
 // check if earthquake occurred in a region with catalog gaps
 // this feature allows for removing potentially induced earthquakes from catalog but 
@@ -128,11 +128,7 @@ float calc_seis_rate(struct smoothp* smpp, struct eqcat* eqcatp, struct compl_le
   else {
     n_eff=1.00;
   }
-// ratev corresponds to the annual rate of an M=0 earthquake (array element, eqno) in the catalog 
-// this version of the code then converts this effective rate (from count or n_eff) and converts to number of M0 earthquakes
-// ratev values are magnitude-corrected effective 10^a values for a single earthquake 
-  exp_rate=cat_parp->bval*mag_Mc;
-  n_eff=n_eff*powf(10, exp_rate);
+// ratev corresponds to the annual rate of earthquake (array element, eqno) in the catalog 
   ratev=rate_fac*n_eff;
     
   return ratev;
@@ -147,8 +143,10 @@ void smooth_seis_rates(struct rates* seisr, struct smoothp* smp, struct eqcat* c
   int cnt, ix, iy, ix1, iy1, n;
   int log_shift_eq, log_shift_pt, log_actual_eq_loc;
   int imaxv=0, tot_asum_int;
-  float maxv=0.0, tot_asum, n_eff, eq_rate, beta, area_scaling;
-  float lonEq, latEq, lonPt, latPt, sigma, avg_lat;
+//  float maxv=0.0, tot_asum, n_eff, eq_rate, beta, area_scaling;
+  float maxv=0.0, tot_asum, n_eff, eq_rate, area_scaling;
+//  float lonEq, latEq, lonPt, latPt, sigma, avg_lat;
+  float lonEq, latEq, lonPt, latPt, sigma;
 //  float lonEq1, latEq1;
   float dist, az, baz, fac_exp, sig2, dist2;
   float norm_term, kernel_sum, sum_eqs=0.0;
@@ -159,7 +157,7 @@ void smooth_seis_rates(struct rates* seisr, struct smoothp* smp, struct eqcat* c
   log_shift_pt=0;
 
 // 
-  beta=2.303*cat_par->bval;
+//  beta=2.303*cat_par->bval;
 
 // check if smoothing is to be applied
 /* -------------------------------------------------------- */
@@ -181,7 +179,6 @@ void smooth_seis_rates(struct rates* seisr, struct smoothp* smp, struct eqcat* c
 
 //  Sum earthquake integers, effective-numbers-earthquakes in asum_cnt and asum
       seisr->asum_cnt_int[n]++;
-//HERE 
       seisr->asum_cnt[n]=seisr->asum_cnt[n]+n_eff;
       seisr->asum[n]=seisr->asum[n]+n_eff;
     }
@@ -204,7 +201,7 @@ void smooth_seis_rates(struct rates* seisr, struct smoothp* smp, struct eqcat* c
   else {
 
 // assign eqs to grid cells for un-smoothed results and maximum, un-smoothed rate
-    avg_lat=0.5*(reg->minlon+reg->maxlon);
+//    avg_lat=0.5*(reg->minlon+reg->maxlon);
     for(cnt=0; cnt<catn->nv; cnt++) {
 //      iy=(int)nearbyintf(((reg->maxlat-catn->lat[cnt])/reg->dlat));
 //      ix=(int)nearbyintf(((catn->lon[cnt]-reg->minlon)/reg->dlon));
@@ -390,7 +387,6 @@ else {
       sum_eqs=sum_eqs+seisr->asum[cnt];
     }
     fprintf(stderr,"Over %d cells, %.2f earthquakes recovered, of %.2f effective events smoothed (%d actual).\n", seisr->nv, sum_eqs, tot_asum, catn->nv);
-    fprintf(stderr,"Effective events are annual rates M>=0 (%.2f M>=3.0)\n", sum_eqs*powf(10,-cat_par->bval*3.0));
   } 				// end smoothing option
 
 

@@ -4,89 +4,6 @@
 #include "agrid.h"
 #include "agrid_functions.h"
 
-/*--------------------------------------------------------------------------*/
-void load_poly_data_years(struct compl_levels* cat_comp, int end_yr_catalog)
-/*--------------------------------------------------------------------------*/
-{
-   FILE *fplst, *fppoly;
-   int cnt, cnt1, cnt2, nheaders, years_gap, year1, year2;
-   int yr_comp;
-   int ygap1, ygap2;
-   char buff[BUFFLEN], nm_tmp[200];
-
-   if( (fplst = fopen(cat_comp->catalogGapsFile, "r"))==NULL) {
-     fprintf(stderr,"Cannot open file with list of polygons, %s\n", cat_comp->catalogGapsFile);
-     exit(1);
-   }
-   fprintf(stderr,"Opened file with list of polygons, %s\n", cat_comp->catalogGapsFile);
-// loop through list of all polygon files
-   cnt=0;
-   while(fgets(buff,BUFFLEN,fplst) ) {
-     sscanf(buff,"%s %d %d %d %d", nm_tmp, &years_gap, &nheaders, &year1, &year2);
-//     cat_comp->polygons.elem[cnt].nyears=years_gap;
-     cat_comp->polygons.elem[cnt].year_start=year1;
-     cat_comp->polygons.elem[cnt].year_end=year2;
-// re-calculated years_gap parameter     
-     if (cat_comp->nlevels == 1) {
-//       fprintf(stderr,"Modifying catalog gap calculation...\n");
-       yr_comp=cat_comp->yr_comp[0];
-// end catalog before catalog gap
-       if ( end_yr_catalog < year1 ) { 
-         cat_comp->polygons.elem[cnt].nyears=0.0;
-//         fprintf(stderr,"end before yr1\n");
-         ygap1=1; ygap2=0;
-       }
-// completeness after catalog gap
-       else if ( yr_comp > year2 ) { 
-         cat_comp->polygons.elem[cnt].nyears=0.0;
-//         fprintf(stderr,"completeness after gap\n");
-         ygap1=1; ygap2=0;
-       }
-       else {
-// some lost time from catalog
-// starting time
-         if ( yr_comp > year1 ) { 
-           ygap1=yr_comp;
-//           fprintf(stderr,"y1a ");
-         }
-         else {
-           ygap1=year1;
-//           fprintf(stderr,"y1b ");
-         }
-// ending time
-         if ( end_yr_catalog > year2 ) { 
-           ygap2=year2;
-//           fprintf(stderr,"y2a\n");
-         }
-         else {
-           ygap2=end_yr_catalog;
-//           fprintf(stderr,"y2b\n");
-         }
-         cat_comp->polygons.elem[cnt].nyears=ygap2-ygap1+1;
-       }
-//       fprintf(stderr,"cat gap %d - %d compl: %d end_cat %d gap: %d (%d %d)\n", year1, year2, yr_comp, end_yr_catalog, cat_comp->polygons.elem[cnt].nyears, ygap1, ygap2);
-       fprintf(stderr,"Catalog gap %d y, %s (%d-%d)\n", cat_comp->polygons.elem[cnt].nyears, nm_tmp, year1, year2);
-     }
-     else {
-       fprintf(stderr,"Cannot modify catalog gap calculation with multiple levels of completeness.\n");
-     }
-     if( (fppoly  = fopen(nm_tmp, "r"))==NULL) {
-       fprintf(stderr,"Cannot open polygon file, %s\n", nm_tmp);
-       exit(1);
-     }
-     for(cnt1=0; cnt1<nheaders; cnt1++) fgets(buff,BUFFLEN,fppoly);
-     cnt2=0;
-     while(fgets(buff,BUFFLEN,fppoly) ) {
-       sscanf(buff,"%f %f", &(cat_comp->polygons.elem[cnt].lon[cnt2]), &(cat_comp->polygons.elem[cnt].lat[cnt2]) );
-       cnt2++;
-     }
-     cat_comp->polygons.elem[cnt].npts=cnt2;
-     fclose(fppoly);
-     cnt++;
-   }
-   cat_comp->polygons.npoly=cnt;
-   fprintf(stderr,"Read %d polygons.\n", cat_comp->polygons.npoly);
-}
 
 /*--------------------------------------------------------------------------*/
 void load_poly_data(struct compl_levels* cat_comp)
@@ -276,7 +193,11 @@ int read_params_new(char *parf, struct compl_levels* cat_comp, struct boundaries
   if ( (cat_comp->variableCompleteness) == 1 ) {
     Parse_Text(fpparam, "Completeness_File",'s', &(cat_comp->completenessFile) );
   }
-// Completeness
+  Parse_Text(fpparam, "Catalog_Gaps",'i', &(cat_comp->catalogGaps) );
+  if ( (cat_comp->catalogGaps) == 1 ) {
+    Parse_Text(fpparam, "Catalog_Gaps_File",'s', &(cat_comp->catalogGapsFile) );
+    load_poly_data(cat_comp);
+  }
   Parse_Text(fpparam, "N_Completeness_Levels",'i', &(cat_comp->nlevels) );
   for (cnt=0; cnt<cat_comp->nlevels; cnt++) {
     sprintf(parseaux,"Completeness_Level_yr_%d", cnt+1);
@@ -284,20 +205,7 @@ int read_params_new(char *parf, struct compl_levels* cat_comp, struct boundaries
     sprintf(parseaux,"Completeness_Level_M_%d", cnt+1);
     Parse_Text(fpparam,parseaux,'f', &(cat_comp->mag_comp[cnt]) );
   }
-// variable Mc
-  Parse_Text(fpparam, "logical_Variable_Mc",'i', &(cat_comp->variableMc) );
-  if ( (cat_comp->variableMc) == 1 ) {
-    Parse_Text(fpparam, "Variable_Mc_File",'s', cat_comp->variableMc_File );
-  }
-// End of catalog
   Parse_Text(fpparam, "End_yr_Catalog",'i', &(cat->end_yr) );
-// Gaps in catalog for CEUS induced seismicity
-  Parse_Text(fpparam, "Catalog_Gaps",'i', &(cat_comp->catalogGaps) );
-  if ( (cat_comp->catalogGaps) == 1 ) {
-    Parse_Text(fpparam, "Catalog_Gaps_File",'s', &(cat_comp->catalogGapsFile) );
-//    load_poly_data(cat_comp);
-    load_poly_data_years(cat_comp, cat->end_yr);
-  }
   Parse_Text(fpparam, "Catalog_Name",'s', &(cat->catnm) );
   Parse_Text(fpparam, "Output_Name",'s', outfnm);
   Parse_Text(fpparam, "Min_Magnitude",'f', &(cat->minMag) );

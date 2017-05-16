@@ -1,6 +1,6 @@
 INST_DIR = $(HOME)/bin
 #BIN = agrid_cumul_compl_eq_c
-BIN = calc_agrid_seis_rates_varMc
+BIN = calc_agrid_seis_rates
 
 fflags = -ffixed-line-length-none -m64
 FFLAGS = $(DBG) $(fflags)
@@ -9,9 +9,8 @@ CFLAGS = $(DBG) $(cflags) -Wall
 FCC = gfortran
 CC = gcc
 
-DBG = -g
-#FOBJS = print_param_format.o read_write_params.o init_dist_rates.o get_eqs_fm_catalog.o get_eq_neighbor_dists.o delaz.o inpolyint.o write_eq_neighbor_dists.o convert_eq_nos_rates.c smooth_seis_rates.c write_asum_to_file.c ck_args_wt_results.c $(BIN).o initialize_params.o Parse_Text.o
-FOBJS = print_param_format.o read_write_params.o init_dist_rates.o get_eqs_fm_catalog.o get_eq_neighbor_dists.o delaz.o inpolyint.o write_eq_neighbor_dists.o convert_eq_nos_rates.o smooth_seis_rates.o write_asum_to_file.o ck_args_wt_results.o $(BIN).o initialize_params.o Parse_Text.o
+DBG = 
+FOBJS = print_param_format.o read_write_params.o init_dist_rates.o get_eqs_fm_catalog.o get_eq_neighbor_dists.o delaz.o inpolyint.o write_eq_neighbor_dists.o convert_eq_nos_rates.c smooth_seis_rates.c write_asum_to_file.c ck_args_wt_results.c calc_agrid_seis_rates.o initialize_params.o Parse_Text.o
 
 all: $(BIN)
 
