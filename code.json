@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "measurementType": {},
+  "agency": "U.S. Department of Interior",
+  "releases": [
+    {
+      "name": "nshmp-haz",
+      "description": "National Seismic Hazard Mapping Project (NSHMP) Earthquake Catalogs",
+      "version": "0.0.0",
+      "status": "Archival",
+      "organization": "U.S. Geological Survey",
+      "vcs": "git",
+      "repositoryURL": "https://github.com/usgs/nshmp-haz-catalogs",
+      "homepageURL": "https://github.com/usgs/nshmp-haz-catalogs",
+      "downloadURL": "https://github.com/usgs/nshmp-haz-catalogs",
+      "disclaimerURL": "https://github.com/usgs/nshmp-haz-catalogs/blob/master/DISCLAIMER.md",
+      "permissions": {
+        "licenses": [
+          {
+            "name": "Public Domain",
+            "URL": "https://github.com/usgs/nshmp-haz-catalogs/blob/master/LICENSE.md"
+          }
+        ],
+        "usageType": "openSource",
+        "exemptionText": null
+      },
+      "laborHours": 200,
+      "languages": [ "Fortran", "C" ],
+      "tags": [
+        "psha",
+        "seismic-hazard",
+        "seismic-source",
+        "earthquake-hazard",
+        "earthquake-source",
+        "earthquake-catalogs"
+      ],
+      "contact": {
+        "name": "Peter Powers",
+        "email": "pmpowers@usgs.gov"
+      },
+      "date": {
+        "metadataLastUpdated": "2017-09-18"
+      }
+    }
+  ]
+}
