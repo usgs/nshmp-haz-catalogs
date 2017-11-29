@@ -1,0 +1,35 @@
+# source boundaries
+Min_Lat=23.0 
+Max_Lat=53.0
+Min_Lon=-116.0
+Max_Lon=-60.0
+Inc_Lat=0.1
+Inc_Lon=0.1
+# completeness levels - no adjusting for these calculations
+N_Completeness_Levels=1
+Completeness_Level_yr_1=1980
+Completeness_Level_M_1=3.5
+Variable_Completeness=0
+Completeness_File=NONE
+Catalog_Gaps=1
+Catalog_Gaps_File=lst_catalog_gaps.txt
+# catalog 
+Catalog_Name=emm_mod.c4
+End_yr_Catalog=2012
+b_Value=1.0
+dMag_value=0.1
+Min_Magnitude=3.5
+# logicals 
+logical_Effective_Num_Eqs=0
+logical_Cumulative_rates=0
+logical_Adjust_completeness=0
+logical_Apply_smoothing=1
+logical_Adaptive_smoothing=1
+logical_Avg_Neighbor=0
+# smoothing parameters
+Adaptive_Neighbor_Number=3
+Sigma_Min=3.0
+Sigma_Max=200.0
+Gauss_PowerLaw_Kernel=gauss
+#Gauss_PowerLaw_Kernel=powerLaw
+Output_Name=agrd_adN3_incr_Mmin3p5_1980_2012

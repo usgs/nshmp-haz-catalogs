@@ -67,7 +67,7 @@ echo "b_Value=1.0" >> param_smoothing.txt
 echo "dMag_value=0.1" >> param_smoothing.txt
 echo "Min_Magnitude=$mag_min" >> param_smoothing.txt
 echo "# logicals " >> param_smoothing.txt
-echo "logical_Effective_Num_Eqs=1" >> param_smoothing.txt
+echo "logical_Effective_Num_Eqs=0" >> param_smoothing.txt
 echo "logical_Cumulative_rates=0" >> param_smoothing.txt
 echo "logical_Adjust_completeness=0" >> param_smoothing.txt
 echo "logical_Apply_smoothing=1" >> param_smoothing.txt
@@ -90,7 +90,7 @@ echo "Parameter file: $paramf"
 if [ $ck_param = "Y" ] || [ $ck_param = "y" ]; then 
   stop_code=1
   echo calc_agrid_seis_rates $paramf $paramf_format $summf $stop_code
-  calc_agrid_seis_rates $paramf $paramf_format $summf $stop_code
+  ./src/calc_agrid_seis_rates $paramf $paramf_format $summf $stop_code
   exit
 fi
 
@@ -99,7 +99,7 @@ logf=log_${nmref}.tmp
 #echo "Running... calc_agrid_seis_rates_neff $paramf $paramf_format $summf '>&' $logf"
 #calc_agrid_seis_rates_neff $paramf $paramf_format $summf >& $logf
 echo "Running... calc_agrid_seis_rates $paramf $paramf_format $summf"
-calc_agrid_seis_rates $paramf $paramf_format $summf 
+./src/calc_agrid_seis_rates $paramf $paramf_format $summf 
 
 # save files
 outd=dir_${nmref}
