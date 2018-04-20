@@ -189,9 +189,31 @@
           ]]
       },
       "properties": {
+        "id": 1,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 1",
-        "mmax": "6.5 (0.2), 7.0 (0.5), 7.5 (0.2), 8.0 (0.1)"
+        "title": "Craton",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.5,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.0,
+            "weight": 0.5
+          },
+          {
+            "id": 3,
+            "Mw": 7.5,
+            "weight": 0.2
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -279,9 +301,31 @@
           ]]
       },
       "properties": {
+        "id": 2,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 2",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Gulf Coast",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.1
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.5
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -392,9 +436,31 @@
           ]]
       },
       "properties": {
+        "id": 3,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 3",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Gulf Coast",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.1
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.5
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -481,9 +547,31 @@
           ]]
       },
       "properties": {
+        "id": 4,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 4",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Mesozoic",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.1
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.5
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -536,9 +624,31 @@
           ]]
       },
       "properties": {
+        "id": 5,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 5",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Mesozoic",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.1
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.5
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -571,9 +681,31 @@
           ]]
       },
       "properties": {
+        "id": 6,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 6",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Mesozoic",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.4
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -663,9 +795,31 @@
           ]]
       },
       "properties": {
+        "id": 7,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 7",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Paleozoic",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.4
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -715,9 +869,31 @@
           ]]
       },
       "properties": {
+        "id": 8,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 8",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Paleozoic",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.4
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -752,9 +928,31 @@
           ]]
       },
       "properties": {
+        "id": 9,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 9",
-        "mmax": "6.5 (0.2), 7.0 (0.5), 7.5 (0.2), 8.0 (0.1)"
+        "title": "Rocky Mountain",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.5,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.0,
+            "weight": 0.5
+          },
+          {
+            "id": 3,
+            "Mw": 7.5,
+            "weight": 0.2
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -794,9 +992,31 @@
           ]]
       },
       "properties": {
+        "id": 10,
         "spacing": 0.1,
-        "title": "SSCn Mmax Zone 10",
-        "mmax": "6.5 (0.2), 7.0 (0.5), 7.5 (0.2), 8.0 (0.1)"
+        "title": "Colorado Plateau",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.5,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.0,
+            "weight": 0.5
+          },
+          {
+            "id": 3,
+            "Mw": 7.5,
+            "weight": 0.2
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     }
   ]
