@@ -1,3 +1,4 @@
+
 {
   "type": "FeatureCollection",
   "features": [
@@ -283,9 +284,31 @@
           ]]
       },
       "properties": {
+        "id": 1,
         "spacing": 0.1,
-        "title": "USGS Mmax Zone 1 – Craton",
-        "mmax": "6.5 (0.2), 7.0 (0.5), 7.5 (0.2), 8.0 (0.1)"
+        "title": "Craton",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.5,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.0,
+            "weight": 0.5
+          },
+          {
+            "id": 3,
+            "Mw": 7.5,
+            "weight": 0.2
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -573,9 +596,31 @@
           ]]
       },
       "properties": {
+        "id": 2,
         "spacing": 0.1,
-        "title": "USGS Mmax Zone 2 – Extended Margin",
-        "mmax": "6.8 (0.1), 7.2 (0.3), 7.6 (0.5), 8.0 (0.1)"
+        "title": "Extended Margin",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.8,
+            "weight": 0.1
+          },
+          {
+            "id": 2,
+            "Mw": 7.2,
+            "weight": 0.3
+          },
+          {
+            "id": 3,
+            "Mw": 7.6,
+            "weight": 0.5
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -610,9 +655,31 @@
           ]]
       },
       "properties": {
+        "id": 3,
         "spacing": 0.1,
-        "title": "USGS Mmax Zone 3 - Rocky Mountain",
-        "mmax": "6.5 (0.2), 7.0 (0.5), 7.5 (0.2), 8.0 (0.1)"
+        "title": "Rocky Mountain",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.5,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.0,
+            "weight": 0.5
+          },
+          {
+            "id": 3,
+            "Mw": 7.5,
+            "weight": 0.2
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     },
     {
@@ -652,9 +719,31 @@
           ]]
       },
       "properties": {
+        "id": 4,
         "spacing": 0.1,
-        "title": "USGS Mmax Zone 4 - Colorado Plateau",
-        "mmax": "6.5 (0.2), 7.0 (0.5), 7.5 (0.2), 8.0 (0.1)"
+        "title": "Colorado Plateau",
+        "mMax": [
+          {
+            "id": 1,
+            "Mw": 6.5,
+            "weight": 0.2
+          },
+          {
+            "id": 2,
+            "Mw": 7.0,
+            "weight": 0.5
+          },
+          {
+            "id": 3,
+            "Mw": 7.5,
+            "weight": 0.2
+          },
+          {
+            "id": 4,
+            "Mw": 8.0,
+            "weight": 0.1
+          }
+        ]
       }
     }
   ]
