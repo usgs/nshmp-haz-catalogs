@@ -213,7 +213,7 @@
           [ -64.465, 51.214 ],
           [ -61, 53 ],
           [ -113.7, 53 ]
-        ]]
+          ]]
       },
       "properties": {
         "id": 1,
@@ -247,8 +247,8 @@
     {
       "type": "Feature",
       "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
+        "type": "MultiPolygon",
+        "coordinates": [[[
           [ -88.813, 32.048 ],
           [ -88.56, 31.883 ],
           [ -88.373, 31.741 ],
@@ -328,42 +328,8 @@
           [ -86.863, 33.849 ],
           [ -87.631, 33.066 ],
           [ -88.813, 32.048 ]
-        ]]
-      },
-      "properties": {
-        "id": 2,
-        "title": "Paleozoic [7]",
-        "fill": "#8856a7",
-        "marker-color": "#8856a7",
-        "mMax": [
-          {
-            "id": 1,
-            "Mw": 6.8,
-            "weight": 0.2
-          },
-          {
-            "id": 2,
-            "Mw": 7.2,
-            "weight": 0.3
-          },
-          {
-            "id": 3,
-            "Mw": 7.6,
-            "weight": 0.4
-          },
-          {
-            "id": 4,
-            "Mw": 8.0,
-            "weight": 0.1
-          }
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
+        ]],
+        [[
           [ -89.346, 37.842 ],
           [ -89, 37.795 ],
           [ -88.687, 37.753 ],
@@ -403,11 +369,11 @@
           [ -89.841, 39.217 ],
           [ -89.875, 38.683 ],
           [ -89.346, 37.842 ]
-        ]]
+        ]]]
       },
       "properties": {
         "id": 2,
-        "title": "Paleozoic [8]",
+        "title": "Paleozoic [7,8]",
         "fill": "#8856a7",
         "marker-color": "#8856a7",
         "mMax": [
@@ -437,8 +403,8 @@
     {
       "type": "Feature",
       "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
+        "type": "MultiPolygon",
+        "coordinates": [[[
           [ -60, 50 ],
           [ -60, 53 ],
           [ -61, 53 ],
@@ -540,42 +506,8 @@
           [ -60.621, 42.26 ],
           [ -60, 42.9 ],
           [ -60, 50 ]
-        ]]
-      },
-      "properties": {
-        "id": 3,
-        "title": "Mesozoic [4,5]",
-        "fill": "#8c96c6",
-        "marker-color": "#8c96c6",
-        "mMax": [
-          {
-            "id": 1,
-            "Mw": 6.8,
-            "weight": 0.1
-          },
-          {
-            "id": 2,
-            "Mw": 7.2,
-            "weight": 0.3
-          },
-          {
-            "id": 3,
-            "Mw": 7.6,
-            "weight": 0.5
-          },
-          {
-            "id": 4,
-            "Mw": 8.0,
-            "weight": 0.1
-          }
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
+        ]],
+        [[
           [ -92.197, 34.905 ],
           [ -91.844, 34.771 ],
           [ -91.523, 34.566 ],
@@ -598,18 +530,18 @@
           [ -90.455, 36.66 ],
           [ -91.318, 35.652 ],
           [ -92.197, 34.905 ]
-          ]]
+        ]]]
       },
       "properties": {
         "id": 3,
-        "title": "Mesozoic [6]",
+        "title": "Mesozoic [4,5,6]",
         "fill": "#8c96c6",
         "marker-color": "#8c96c6",
         "mMax": [
           {
             "id": 1,
             "Mw": 6.8,
-            "weight": 0.2
+            "weight": 0.1
           },
           {
             "id": 2,
@@ -619,7 +551,7 @@
           {
             "id": 3,
             "Mw": 7.6,
-            "weight": 0.4
+            "weight": 0.5
           },
           {
             "id": 4,
@@ -778,7 +710,7 @@
           [ -99.323, 29.192 ],
           [ -100.19, 29.23 ],
           [ -101, 29.2 ]
-        ]]
+          ]]
       },
       "properties": {
         "id": 4,
