@@ -1,1 +1,3 @@
 out/
+**/agrids/*.csv
+catalogs

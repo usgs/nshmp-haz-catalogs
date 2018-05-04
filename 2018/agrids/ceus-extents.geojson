@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [ -116.0, 23.0 ],
+          [  -60.0, 23.0 ],
+          [  -60.0, 53.0 ],
+          [ -116.0, 53.0 ],
+          [ -116.0, 23.0 ]
+        ]]
+      },
+      "properties": {
+        "fill": "#AA0078",
+        "marker-color": "#AA0078",
+        "title": "Central & Eastern US a-grid extent"
+      }
+    }
+  ]
+}
