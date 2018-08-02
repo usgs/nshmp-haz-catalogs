@@ -102,7 +102,7 @@ echo "Running... calc_agrid_seis_rates $paramf $paramf_format $summf"
 ./src/calc_agrid_seis_rates $paramf $paramf_format $summf 
 
 # save files
-outd=dir_${nmref}
+outd=out_${nmref}
 mkdir $outd
 mv $summf agrd*.out param_*.in selected_eqs*.dat $outd
 cp $catf $outd
