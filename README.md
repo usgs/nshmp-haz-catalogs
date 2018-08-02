@@ -1,6 +1,6 @@
-## National Seismic Hazard Model (NSHM) Earthquake Catalogs
+## National Seismic Hazard Mapping Project (NSHMP) Earthquake Catalogs
 
-With each release of the NSHM, a variety of earthquake catalogs are compiled and subsequently processed to remove duplicate, dependent (foreshocks and aftershocks), and anthropogenic events. Gridded seismicity source models in hazard calculations are derived from final, filtered catalogs. The tables below outline the processing steps applied to each catalog available in this repository.
+With each release or update of a National Seismic Hazard Model (NSHM), a variety of earthquake catalogs are compiled and subsequently processed to remove duplicate, dependent (foreshocks and aftershocks), and anthropogenic events. Gridded seismicity source models in hazard calculations are derived from final, filtered catalogs. The tables below outline the processing steps applied to each catalog available in this repository.
 
 ### [2014 NSHM Catalogs](https://github.com/usgs/nshmp-haz-catalogs/tree/master/2014)
 

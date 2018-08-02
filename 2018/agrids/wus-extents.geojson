@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [ -126.5, 24.6 ],
+          [ -100.0, 24.6 ],
+          [ -100.0, 51.0 ],
+          [ -126.5, 51.0 ],
+          [ -126.5, 24.6 ]
+        ]]
+      },
+      "properties": {
+        "fill": "#AA0078",
+        "marker-color": "#AA0078",
+        "title": "Western US a-grid extent"
+      }
+    }
+  ]
+}
