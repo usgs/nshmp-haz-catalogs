@@ -1,1 +1,6 @@
 out/
+*.o
+calc_agrid_seis_rates
+out_*
+param_*
+summ_*
