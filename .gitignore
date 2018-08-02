@@ -1,4 +1,6 @@
 out/
+**/agrids/*.csv
+catalogs
 *.o
 calc_agrid_seis_rates
 out_*
