@@ -1,6 +1,7 @@
 out/
 **/agrids/*.csv
 catalogs
+.vscode
 
 # Adaptive Smoothing Code
 *.o
