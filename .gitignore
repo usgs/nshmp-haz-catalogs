@@ -1,8 +1,14 @@
 out/
 **/agrids/*.csv
 catalogs
+.vscode
+
+# Adaptive Smoothing Code
 *.o
 calc_agrid_seis_rates
 out_*
 param_*
 summ_*
+
+# Fixed Smoothing Code
+bin/
