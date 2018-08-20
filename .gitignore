@@ -1,14 +1,13 @@
-out/
-**/agrids/*.csv
-catalogs
+.classpath
+.DS_Store
+.gradle
+.project
+.settings
 .vscode
-
-# Adaptive Smoothing Code
-*.o
-calc_agrid_seis_rates
-out_*
-param_*
-summ_*
-
-# Fixed Smoothing Code
-bin/
+agridOut*/
+bin
+build
+catalogs
+tmp
+**/agrids/*.csv
+Scratch*.java
