@@ -1,0 +1,43 @@
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+  compile('com.google.guava:guava:24.1-jre') {                                  
+    transitive = false                                                          
+  }   
+
+  compile 'com.google.code.gson:gson:2.8.2'
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src']
+    }
+  }
+}
+
+jar {
+  from {
+    configurations.compile.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
+}
+
+mainClassName = 'agrid.CEUSAgridCalc'
+
+task make(type: Exec) {
+  commandLine 'make'
+}
+
+assemble.dependsOn make
