@@ -84,7 +84,7 @@ int get_eqs_fm_catalog(char *fnm, struct eqcat* catn, struct compl_levels* compl
   fprintf(stderr,"Regional boundaries for eqs: min/max lon, lat: %d %d\n", reg->nsy, reg->nsx);
   while( fgets(buff,BUFFLEN,fpcat) ) {
 //    sscanf(buff,"%f %f %f %f %d %d %d %d %d %f %f %f", &mag, &lon, &lat, &dep, &yr, &mon, &day, &hr, &min, &sec, &msig, &neff);
-    sscanf(buff,"%f %f %f %f %d %d %d %d %d %f %f %f %f", &mag, &lon, &lat, &dep, &yr, &mon, &day, &hr, &min, &sec, &msig, &mconv, &neff);
+    sscanf(buff,"%f %f %f %f %d %d %d %d %d %f %f %f %f", &mconv, &lon, &lat, &dep, &yr, &mon, &day, &hr, &min, &sec, &msig, &mag, &neff);
     if ( (lon>=reg->minlon) && (lon<=reg->maxlon) &&  (lat>=reg->minlat) && (lat<=reg->maxlat) ) {
       for(cnt1=0; cnt1<compl->nlevels; cnt1++) {
 //        fprintf(stderr,"mag/yr completeness level: %f %d\n", compl->mag_comp[cnt1], compl->yr_comp[cnt1]);

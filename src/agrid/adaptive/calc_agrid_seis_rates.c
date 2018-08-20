@@ -72,7 +72,7 @@ fprintf(stderr,"outfnm: %s\n", outf);
 
 // write results to file
 //fprintf(stdout,"call to write_results_to_file - %s\n", outf);
-  write_results_to_file(&smoothing_params, &seis_rates, &cat, outf);
+  write_results_to_file(&smoothing_params, &seis_rates, &cat, &region, outf);
 
 // code completion steps
   fprintf(stdout,"\nSummary of processing written to file, %s\n", summf);

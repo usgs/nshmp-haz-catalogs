@@ -82,6 +82,63 @@ void write_asum_to_file(struct rates* seisr, char *fbasenm, struct catalog * cat
 
 }
 
+/*--------------------------------------------------------------------------*/  
+void write_asum_to_csvfile(
+    struct rates *seisr,
+    char *fbasenm,
+    struct catalog *catv,
+    struct boundaries *boundR,
+    float mag)
+/*--------------------------------------------------------------------------*/  
+{
+  FILE *fpout;
+  FILE *foutAscii;
+  int nsrc, cnt;
+  int iy, ix;
+  float diffth=1e-1;
+  char fileout[200];
+  char fileoutAscii[200];
+                                                                                
+  // compute lon/lat array
+  // get rate array and naming based on magnitude input values
+  nsrc=seisr->nv;
+  
+  // Magnitudes
+  if ( fabsf(mag-0.0)<diffth ) {
+    sprintf(fileout,"%s_M0.csv", fbasenm);
+    sprintf(fileoutAscii,"%s_M0.asc", fbasenm);
+
+    fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileout);
+    fprintf(stderr,"M%.2f, writing to file - %s\n", mag, fileoutAscii);
+
+    fpout=fopen(fileout,"w");
+    foutAscii = fopen(fileoutAscii, "w");
+
+    for(cnt=0; cnt<nsrc; cnt++) {
+      iy=cnt/boundR->nsx;
+      ix=cnt-iy*boundR->nsx;
+      fprintf(
+        fpout,
+        "%9.3f,%8.3f, GR,%12.6e \n",
+        boundR->minlon+ix*boundR->dlon,
+        boundR->maxlat-iy*boundR->dlat,
+        seisr->asum[cnt]);
+
+      fprintf(
+        foutAscii,
+        "%9.3f%8.3f%12.6e \n",
+        boundR->minlon+ix*boundR->dlon,
+        boundR->maxlat-iy*boundR->dlat,
+        seisr->asum[cnt]);
+    }
+
+    fclose(fpout);
+    fclose(foutAscii);
+  } else {
+    fprintf(stderr, "No csvfile write option for M~=0\n");
+  }
+
+}
 
 /*--------------------------------------------------------------------------*/
 void write_unsmoothed_asum_to_file(struct rates* seisr, char *fbasenm)

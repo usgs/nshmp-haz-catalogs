@@ -48,7 +48,7 @@ int check_args(int argc, char **argv, char *paramf, char *summf, char *paramf_fo
 
 
 /*--------------------------------------------------------------------------*/
-void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct catalog * cat, char *outf)
+void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct catalog * cat, struct boundaries *boundR, char *outf)
 /*--------------------------------------------------------------------------*/
 {
   int cnt;
@@ -66,6 +66,8 @@ void write_results_to_file(struct smoothp* smp, struct rates* seisr, struct cata
 // M0, 10^a values
     magv=0.0;
     write_asum_to_file(seisr, outf, cat, magv);
+    fprintf(stderr,"Writing to csv file...\n");
+    write_asum_to_csvfile(seisr, outf, cat, boundR, magv);
 // M0, 10^a, un-smoothed 
 //    write_unsmoothed_asum_to_file(seisr, outf);
 
