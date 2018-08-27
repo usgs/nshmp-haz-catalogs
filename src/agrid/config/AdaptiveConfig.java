@@ -6,8 +6,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import agrid.AgridModel.AgridProperties;
 import agrid.AgridUtils;
-import agrid.CEUSAgridCalc;
 
 public class AdaptiveConfig {
   public final AdaptiveSmoothing adaptiveSmoothing;
@@ -79,10 +79,10 @@ public class AdaptiveConfig {
       return this;
     }
     
-    public static Builder withDefaults() {
+    public static Builder withDefaults(AgridProperties agridProperties) {
       Builder builder = new Builder();
       builder.adaptiveSmoothing = AdaptiveSmoothing.Builder.withDefaults();
-      builder.completeness = Completeness.Builder.withDefaults();
+      builder.completeness = Completeness.Builder.withDefaults(agridProperties);
       builder.smoothing = Smoothing.Builder.withDefaults();
       return builder;
     }
@@ -174,19 +174,21 @@ public class AdaptiveConfig {
   }
   
   public static class Completeness {
-    final Boolean applyCatalogGaps;
-    final Boolean applyVariableCompleteness;
-    final Path catalogGapsFile;
-    final Integer catalogStartYear;
-    final Path completenessFile;
-    final Double minMagnitude;
-    final Double magnitudeIncrement;
-    final Boolean useCorrectLatitudeArea;
+    public final Boolean applyCatalogGaps;
+    public final Boolean applyVariableCompleteness;
+    public final Path catalogGapsFile;
+    public final Path catalogGapsPolygonPath;
+    public final Integer catalogStartYear;
+    public final Path completenessFile;
+    public final Double minMagnitude;
+    public final Double magnitudeIncrement;
+    public final Boolean useCorrectLatitudeArea;
     
     private Completeness(Builder builder) {
       this.applyCatalogGaps = builder.applyCatalogGaps;
       this.applyVariableCompleteness = builder.applyVariableCompleteness;
       this.catalogGapsFile = builder.catalogGapsFile;
+      this.catalogGapsPolygonPath = builder.catalogGapsPolygonPath;
       this.catalogStartYear = builder.catalogStartYear;
       this.completenessFile = builder.completenessFile;
       this.magnitudeIncrement = builder.magnitudeIncrement;
@@ -202,6 +204,7 @@ public class AdaptiveConfig {
       private Boolean applyCatalogGaps;
       private Boolean applyVariableCompleteness;
       private Path catalogGapsFile;
+      private Path catalogGapsPolygonPath;
       private Integer catalogStartYear;
       private Path completenessFile;
       private Double minMagnitude;
@@ -210,6 +213,7 @@ public class AdaptiveConfig {
       
       public Completeness build() {
         AgridUtils.checkPath(catalogGapsFile);
+        AgridUtils.checkPath(catalogGapsPolygonPath);
         AgridUtils.checkPath(completenessFile);
         return new Completeness(this);
       }
@@ -218,6 +222,7 @@ public class AdaptiveConfig {
         this.applyCatalogGaps = that.applyCatalogGaps;
         this.applyVariableCompleteness = that.applyVariableCompleteness;
         this.catalogGapsFile = that.catalogGapsFile;
+        this.catalogGapsPolygonPath = that.catalogGapsPolygonPath;
         this.catalogStartYear = that.catalogStartYear;
         this.completenessFile = that.completenessFile;
         this.magnitudeIncrement = that.magnitudeIncrement;
@@ -237,6 +242,10 @@ public class AdaptiveConfig {
         
         if (that.catalogGapsFile != null) {
           this.catalogGapsFile = that.catalogGapsFile;
+        }
+        
+        if (that.catalogGapsPolygonPath != null) {
+          this.catalogGapsPolygonPath = that.catalogGapsPolygonPath;
         }
         
         if (that.catalogStartYear != null) {
@@ -262,35 +271,39 @@ public class AdaptiveConfig {
         return this;
       }
       
-      static Builder withDefaults() {
+      static Builder withDefaults(AgridProperties agridProperties) {
         Builder builder = new Builder();
         builder.applyCatalogGaps = true;
         builder.applyVariableCompleteness = true;
-        builder.catalogGapsFile = CEUSAgridCalc.ETC_PATH
-            .resolve("adaptive/catalog_gaps.txt")
+        builder.catalogGapsFile = agridProperties.adaptiveEtcDirPath 
+            .resolve("catalog_gaps.txt")
+            .toAbsolutePath()
+            .normalize();
+        builder.catalogGapsPolygonPath = agridProperties.adaptiveEtcDirPath
+            .resolve("polygons_for_gaps")
             .toAbsolutePath()
             .normalize();
         builder.catalogStartYear = 1870;
-        builder.completenessFile = CEUSAgridCalc.ETC_PATH
-            .resolve("adaptive/completeness_maps/compl_CEUS_M3p2.txt")
+        builder.completenessFile = agridProperties.adaptiveEtcDirPath
+            .resolve("completeness_maps/compl_CEUS_M3p2.txt")
             .toAbsolutePath()
             .normalize();
         builder.magnitudeIncrement = 0.1;
         builder.minMagnitude = 3.2;
-        builder.useCorrectLatitudeArea = false;
+        builder.useCorrectLatitudeArea = true;
         return builder;
       }
     }
   }
   
   public static class Smoothing {
-    final Boolean adjustCompleteness;
-    final Boolean applyCumulativeRates;
-    final Boolean applyEffectiveNumberEquations;
-    final Boolean applySmoothing;
-    final Boolean checkSmoothingParameters;
-    final Double fixedSigma;
-    final String gaussPowerLawKernel;
+    public final Boolean adjustCompleteness;
+    public final Boolean applyCumulativeRates;
+    public final Boolean applyEffectiveNumberEquations;
+    public final Boolean applySmoothing;
+    public final Boolean checkSmoothingParameters;
+    public final Double fixedSigma;
+    public final String gaussPowerLawKernel;
     
     private Smoothing(Builder builder) {
       this.adjustCompleteness = builder.adjustCompleteness;

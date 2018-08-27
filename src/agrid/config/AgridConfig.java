@@ -19,6 +19,8 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import agrid.AgridModel.AgridProperties;
+
 public class AgridConfig {
   static final Gson GSON; 
   
@@ -56,8 +58,8 @@ public class AgridConfig {
     return GSON.toJson(this, AgridConfig.class);
   }
   
-  public static AgridConfig withDefaults() {
-    return Builder.withDefaults().build();
+  public static AgridConfig withDefaults(AgridProperties agridProperties) {
+    return Builder.withDefaults(agridProperties).build();
   }
   
   public static Builder builder() {
@@ -124,9 +126,9 @@ public class AgridConfig {
       return this;
     }
     
-    public static Builder withDefaults() {
+    public static Builder withDefaults(AgridProperties agridProperties) {
       Builder builder = new Builder();
-      builder.adaptive = AdaptiveConfig.Builder.withDefaults();
+      builder.adaptive = AdaptiveConfig.Builder.withDefaults(agridProperties);
       builder.catalog = CatalogConfig.Builder.withDefaults();
       builder.fixed = FixedConfig.Builder.withDefaults();
       builder.output = OutputConfig.Builder.withDefaults();
