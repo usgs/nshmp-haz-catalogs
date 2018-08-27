@@ -5,28 +5,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 
-import agrid.CEUSAgridCalc.AgridArguments;
 import agrid.config.AgridConfig;
 import agrid.config.FixedConfig;
 
 public class CEUSFixedCalc {
+  private static final String USAGE_COMMAND = AgridUtils.JAVA_COMMAND + 
+      " agrid.CEUSFixedCalc catalogFile [config]";
 
   public static void main(String[] args) throws IOException, InterruptedException {
-    AgridArguments agridArgs = AgridArguments.getArguments(args);
-    AgridConfig config = agridArgs.config;
-    Path catalogFilePath = agridArgs.catalogFilePath;
+    AgridUtils.checkArguments(args, USAGE_COMMAND);
     
-    runFixed(config, catalogFilePath);
-    Path out = config.output.directory.resolve("config.json"); 
-    FixedConfig.writeFixedConfig(config, out);
-    System.out.printf("\n\nFiles reside in [%s] \n\n", config.output.directory);
+    try {
+      AgridModel agridModel = AgridModel.getAgridModel(args);
+      AgridConfig config = agridModel.config;
+      
+      runFixed(agridModel);
+      Path out = config.output.directory.resolve("config.json"); 
+      FixedConfig.writeFixedConfig(config, out);
+      System.out.printf("\n\nFiles reside in [%s] \n\n", config.output.directory);
+    } catch (Exception e) {
+      AgridUtils.handleError(e, args, USAGE_COMMAND);
+    }
+    
+    System.exit(0);
   }
 
-  static void runFixed(
-      AgridConfig config,
-      Path catalogFile) throws IOException, InterruptedException {
+  static void runFixed(AgridModel agridModel) throws IOException, InterruptedException {
     System.out.println("\n\n============= Running Fixed ============== \n");
 
+    AgridConfig config = agridModel.config;
+    Path catalogFilePath = agridModel.catalogFilePath;
+    
     Path fixedDirectoryPath = config.output.directory.resolve("fixed")
         .toAbsolutePath()
         .normalize();
@@ -40,8 +49,8 @@ public class CEUSFixedCalc {
     
     String cmd = String.format(
         "%s %s %s %d %f %f %d",
-        CEUSAgridCalc.FIXED_EXE_PATH,
-        catalogFile,
+        agridModel.fixedExePath,
+        catalogFilePath,
         modelInput,
         config.catalog.catalogEndYear,
         config.catalog.bValue,
