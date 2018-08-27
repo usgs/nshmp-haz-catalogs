@@ -41,6 +41,7 @@ struct compl_levels {
   float dMag;
   char completenessFile[200];
   char catalogGapsFile[200];
+  char catalogGapsPolygonPath[200];
   int nVarComp; 
   int yrCompl_arr[NV];
   float magCompl_arr[NV];
