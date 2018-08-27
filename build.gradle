@@ -26,11 +26,37 @@ sourceSets {
   }
 }
 
+ext {
+  etcDir = "${projectDir}/etc"
+  adaptiveEtcDir = "${etcDir}/adaptive"
+  
+  exeDir = "${buildDir}/exe"
+  adaptiveExePath = "${exeDir}/adaptiveAgrid"
+  fixedExePath = "${exeDir}/fixedAgrid"
+  
+  agridPropsPath = "${buildDir}/classes/java/main/agrid/config.properties"
+}
+
 jar {
   from {
     configurations.compile.collect {
       it.isDirectory() ? it : zipTree(it)
     }
+  }
+
+  doFirst {
+    CheckPath.checkPath(etcDir)
+    CheckPath.checkPath(adaptiveEtcDir)
+
+    def props = new Properties();
+    def propsFile = new File(agridPropsPath) 
+    propsFile.createNewFile()
+
+    props.setProperty('adaptiveEtcDir', adaptiveEtcDir)
+    props.setProperty('adaptiveExe', adaptiveExePath)
+    props.setProperty('fixedExe', fixedExePath)
+
+    props.store(propsFile.newWriter(), null)
   }
 }
 
@@ -38,6 +64,22 @@ mainClassName = 'agrid.CEUSAgridCalc'
 
 task make(type: Exec) {
   commandLine 'make'
+
+  doLast {
+    CheckPath.checkPath(adaptiveExePath)
+    CheckPath.checkPath(fixedExePath)
+  }
 }
 
 assemble.dependsOn make
+
+class CheckPath {
+
+  static void checkPath(String path) {
+    Boolean fileExists = new File(path).exists();
+
+    if (!fileExists) {
+      throw new FileNotFoundException("Path not found [${path}]")
+    }
+  }
+}
