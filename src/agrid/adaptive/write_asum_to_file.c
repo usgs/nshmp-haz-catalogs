@@ -119,14 +119,14 @@ void write_asum_to_csvfile(
       ix=cnt-iy*boundR->nsx;
       fprintf(
         fpout,
-        "%9.3f,%8.3f, GR,%12.6e \n",
+        "%9.3f, %8.3f, GR, %12.6e \n",
         boundR->minlon+ix*boundR->dlon,
         boundR->maxlat-iy*boundR->dlat,
         seisr->asum[cnt]);
 
       fprintf(
         foutAscii,
-        "%9.3f%8.3f%12.6e \n",
+        "%9.3f %8.3f %12.6e \n",
         boundR->minlon+ix*boundR->dlon,
         boundR->maxlat-iy*boundR->dlat,
         seisr->asum[cnt]);
