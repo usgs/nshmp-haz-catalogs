@@ -3,13 +3,13 @@ Adaptive_Neighbor_Number=4
 Adaptive_Neighbor_Number2=null
 logical_Adaptive_smoothing=1
 logical_Avg_Neighbor=0
-Sigma_Max=200.000000
-Sigma_Min=3.000000
+Sigma_Max=200.00
+Sigma_Min=3.00
 # Catalog parameters 
-b_Value=1.000000
+b_Value=1.00
 Catalog_Name=/path/to/catalogFile
 End_yr_Catalog=2012
-Min_Magnitude=3.200000
+Min_Magnitude=3.20
 # Completeness levels 
 N_Completeness_Levels=1
 Variable_Completeness=1
@@ -18,8 +18,8 @@ Catalog_Gaps=1
 Polygons_for_Gaps_Path=/path/to/nshmp-haz-catalogs/etc/adaptive/polygons_for_gaps
 Catalog_Gaps_File=/path/to/nshmp-haz-catalogs/etc/adaptive/catalog_gaps.txt
 Completeness_Level_yr_1=1870
-Completeness_Level_M_1=3.200000
-dMag_value=0.100000
+Completeness_Level_M_1=3.20
+dMag_value=0.10
 Correct_Area_for_Latitude=1
 # Smoothing parameters 
 logical_Cumulative_rates=0
@@ -29,10 +29,10 @@ logical_Apply_smoothing=1
 Sigma_Fix=null
 Gauss_PowerLaw_Kernel=gauss
 # Source boundaries 
-Min_Lat=23.000000
-Max_Lat=53.000000
-Min_Lon=-116.000000
-Max_Lon=-60.000000
-Inc_Lat=0.100000
-Inc_Lon=0.100000
+Min_Lat=23.00
+Max_Lat=53.00
+Min_Lon=-116.00
+Max_Lon=-60.00
+Inc_Lat=0.10
+Inc_Lon=0.10
 Output_Name=adaptiveAgrid
