@@ -49,7 +49,7 @@ void assign_variable_completeness_eqs(struct eqcat* cat, struct compl_levels* co
       cat->neff[cnt1]=cat->neff[cnt];
       cat->mag_sigma[cnt1]=cat->mag_sigma[cnt];
       cat->year_compl[cnt1]=cat->year_compl[cnt];
-      fprintf(stderr,"%d %d %d %f\n", cat->year[cnt1], cat->month[cnt1], cat->day[cnt1], cat->mag[cnt1]);
+      fprintf(stderr,"%4d %4d %4d %8.4f\n", cat->year[cnt1], cat->month[cnt1], cat->day[cnt1], cat->mag[cnt1]);
       cnt1++;
     }
 /*    else {

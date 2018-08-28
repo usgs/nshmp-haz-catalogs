@@ -3,11 +3,13 @@ package agrid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
 
-import agrid.config.AgridConfig;
+import com.google.common.base.Throwables;
 
 public class AgridUtils {
+  static final String GITHUB_URL = "https://github.com/usgs/nshmp-haz-catalogs";
+  static final String JAVA_COMMAND = "java -cp nshmp-haz-catalogs.jar";
   
   public static Path checkPath(Path path) {
     if (!Files.exists(path)) {
@@ -33,22 +35,42 @@ public class AgridUtils {
     return incrementedDir.toAbsolutePath().normalize();
   }
   
-  static AgridConfig getCalcArguments(String[] args) throws IOException {
+  static void checkArguments(String[] args, String javaUsageCommand) {
     int argCount = args.length;
-   
-    Path catalogPath = Paths.get(args[0]).toAbsolutePath().normalize();
-    AgridConfig config = AgridConfig.withDefaults();
     
-    if (argCount == 2) {
-      Path userConfigPath = Paths.get(args[1]);
-      
-      config = AgridConfig.builder()
-          .copyOf(config)
-          .extend(AgridConfig.builder().fromFile(userConfigPath))
-          .build();
+    if (argCount < 1 || argCount > 2) {
+      System.err.print(getUsage(javaUsageCommand));
+      System.exit(1);
     }
-    
-    return config;
   }
   
+  static void handleError(Throwable e, String[] args, String javaUsageCommand) {
+    String message = new StringBuilder()
+        .append("\n")
+        .append("ERROR: \n")
+        .append("   Arguments: ").append(Arrays.toString(args)).append("\n\n")
+        .append(Throwables.getStackTraceAsString(e))
+        .append(getUsage(javaUsageCommand))
+        .toString();
+    
+    System.err.print(message);
+    System.exit(1);
+  }
+  
+  static String getUsage(String javaUsageCommand) {
+    return new StringBuilder()
+      .append("\n")
+      .append("Usage: \n")
+      .append("   " + javaUsageCommand) 
+      .append("\n\n")
+      .append("Where: \n")
+      .append("   'catalogFile' is the NSHMP earthquake catalog file \n")
+      .append("   'config' (optional) supplies configuration for adaptive and fixed calculations") 
+      .append("\n\n")
+      .append("For more information, see: \n")
+      .append("   " + GITHUB_URL)
+      .append("\n\n")
+      .toString();
+  }
+ 
 }

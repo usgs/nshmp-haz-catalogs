@@ -86,9 +86,9 @@ public class CatalogConfig {
       
       BufferedWriter writer = Files.newBufferedWriter(out);
       
-      writer.write(String.format("%f %f\n", minLatitude, maxLatitude));
-      writer.write(String.format("%f %f\n", minLongitude, maxLongitude));
-      writer.write(String.format("%f %f\n", latitudeIncrement, longitudeIncrement));
+      writer.write(String.format("%6.4f %6.4f\n", minLatitude, maxLatitude));
+      writer.write(String.format("%6.4f %6.4f\n", minLongitude, maxLongitude));
+      writer.write(String.format("%3.3f %3.3f\n", latitudeIncrement, longitudeIncrement));
       writer.close();
     }
     

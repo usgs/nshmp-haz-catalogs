@@ -1,13 +1,12 @@
 package agrid.config;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
+import agrid.AgridModel;
 import agrid.AgridUtils;
 import agrid.config.AdaptiveConfig.AdaptiveSmoothing;
 import agrid.config.AdaptiveConfig.Completeness;
@@ -15,43 +14,17 @@ import agrid.config.AdaptiveConfig.Smoothing;
 import agrid.config.CatalogConfig.SourceBoundaries;
 
 public class WriteAdaptiveFiles {
-  static final String FILE_NAME = "smoothingParameters.in";
+  static final String FILE_NAME = "agridParameters.in";
   
   private WriteAdaptiveFiles() {}
   
-  public static Path writeCatalogGapsFile(
-      AgridConfig config,
-      Path adaptiveDirectoryPath) throws IOException {
-    AdaptiveConfig adaptive = config.adaptive;
-    Path catalogGapsInputPath = adaptive.completeness.catalogGapsFile;
-    
-    String catalogGapsDir = catalogGapsInputPath.getParent().toAbsolutePath().normalize().toString();
-    Path catalogGapsOutputPath = Paths.get(
-        adaptiveDirectoryPath.toString(), 
-        catalogGapsInputPath.getFileName().toString())
-        .toAbsolutePath()
-        .normalize();
-    
-    BufferedWriter writer = Files.newBufferedWriter(catalogGapsOutputPath, StandardCharsets.UTF_8);
-    BufferedReader reader = Files.newBufferedReader(catalogGapsInputPath, StandardCharsets.UTF_8);
-
-    String line = null;
-    while((line = reader.readLine()) != null) {
-      line = catalogGapsDir + "/" + line + "\n";
-      writer.write(line);
-    }
-    
-    writer.close();
-    reader.close();
-    
-    return catalogGapsOutputPath;
-  }
-  
   public static Path writeParameterFile(
-      AgridConfig config,
-      Path catalogFilePath,
-      Path adaptiveDirectoryPath) throws IOException {
-    Path out = adaptiveDirectoryPath.resolve(FILE_NAME);
+      AgridModel agridModel,
+      Path adaptiveDirPath,
+      String parameterFileName) throws IOException {
+    AgridConfig config = agridModel.config;
+    
+    Path out = adaptiveDirPath.resolve(parameterFileName);
     
     BufferedWriter writer = Files.newBufferedWriter(out, StandardCharsets.UTF_8); 
     
@@ -60,7 +33,7 @@ public class WriteAdaptiveFiles {
     writeAdaptiveSmoothing(writer, adaptiveSmoothing);
 
     /* Write catalog parameters */
-    writeCatalog(writer, config, catalogFilePath);
+    writeCatalog(writer, config, agridModel.catalogFilePath);
     
     /* Write Completeness levels */
     Completeness completeness = config.adaptive.completeness;
@@ -101,9 +74,9 @@ public class WriteAdaptiveFiles {
         "logical_Avg_Neighbor=%d\n", 
         AgridUtils.boolean2Int(adaptiveSmoothing.useAverageNeighbor)));
     
-    writer.write(String.format("Sigma_Max=%f\n", adaptiveSmoothing.maxSigma));
+    writer.write(String.format("Sigma_Max=%.4f\n", adaptiveSmoothing.maxSigma));
     
-    writer.write(String.format("Sigma_Min=%f\n", adaptiveSmoothing.minSigma));
+    writer.write(String.format("Sigma_Min=%.4f\n", adaptiveSmoothing.minSigma));
   }
   
   private static void writeCatalog(
@@ -112,11 +85,11 @@ public class WriteAdaptiveFiles {
       Path catalogFilePath) throws IOException {
     CatalogConfig catalog = config.catalog;
     
-    writer.write("#Catalog parameters \n");
-    writer.write(String.format("b_Value=%f\n", catalog.bValue));
+    writer.write("# Catalog parameters \n");
+    writer.write(String.format("b_Value=%.4f\n", catalog.bValue));
     writer.write(String.format("Catalog_Name=%s\n", catalogFilePath));
     writer.write(String.format("End_yr_Catalog=%d\n", catalog.catalogEndYear));
-    writer.write(String.format("Min_Magnitude=%f\n", config.adaptive.completeness.minMagnitude)); 
+    writer.write(String.format("Min_Magnitude=%.4f\n", config.adaptive.completeness.minMagnitude)); 
   }
   
   private static void writeCompleteness(BufferedWriter writer, Completeness completeness) 
@@ -136,13 +109,17 @@ public class WriteAdaptiveFiles {
         AgridUtils.boolean2Int(completeness.applyCatalogGaps)));
     
     writer.write(String.format(
+        "Polygons_for_Gaps_Path=%s\n",
+        completeness.catalogGapsPolygonPath));
+    
+    writer.write(String.format(
         "Catalog_Gaps_File=%s\n", 
-        completeness.catalogGapsFile.getFileName()));
+        completeness.catalogGapsFile));
     
     writer.write(String.format("Completeness_Level_yr_1=%d\n", completeness.catalogStartYear));
-    writer.write(String.format("Completeness_Level_M_1=%f\n", completeness.minMagnitude));
+    writer.write(String.format("Completeness_Level_M_1=%.4f\n", completeness.minMagnitude));
     
-    writer.write(String.format("dMag_value=%f\n", completeness.magnitudeIncrement));
+    writer.write(String.format("dMag_value=%.4f\n", completeness.magnitudeIncrement));
 
     writer.write(String.format(
         "Correct_Area_for_Latitude=%d\n", 
@@ -151,24 +128,24 @@ public class WriteAdaptiveFiles {
   
   private static void writeSmoothing(BufferedWriter writer, Smoothing smoothing) 
       throws IOException {
-    writer.write(String.format("# smoothing parameters \n"));
+    writer.write(String.format("# Smoothing parameters \n"));
     writer.write(String.format("logical_Cumulative_rates=%d\n", AgridUtils.boolean2Int(smoothing.applyCumulativeRates)));
     writer.write(String.format("logical_Adjust_completeness=%d\n", AgridUtils.boolean2Int(smoothing.adjustCompleteness)));
     writer.write(String.format("logical_Effective_Num_Eqs=%d\n", AgridUtils.boolean2Int(smoothing.applyEffectiveNumberEquations)));
     writer.write(String.format("logical_Apply_smoothing=%d\n", AgridUtils.boolean2Int(smoothing.applySmoothing)));
-    writer.write(String.format("Sigma_Fix=%f\n", smoothing.fixedSigma));
+    writer.write(String.format("Sigma_Fix=%.4f\n", smoothing.fixedSigma));
     writer.write(String.format("Gauss_PowerLaw_Kernel=%s\n", smoothing.gaussPowerLawKernel));
   }
   
   private static void writeSourceBoundaries(BufferedWriter writer, SourceBoundaries bounds) 
       throws IOException {
-    writer.write("# source boundaries \n");
-    writer.write(String.format("Min_Lat=%f\n", bounds.minLatitude));
-    writer.write(String.format("Max_Lat=%f\n", bounds.maxLatitude));
-    writer.write(String.format("Min_Lon=%f\n", bounds.minLongitude));
-    writer.write(String.format("Max_Lon=%f\n", bounds.maxLongitude));
-    writer.write(String.format("Inc_Lat=%f\n", bounds.latitudeIncrement));
-    writer.write(String.format("Inc_Lon=%f\n", bounds.longitudeIncrement));
+    writer.write("# Source boundaries \n");
+    writer.write(String.format("Min_Lat=%.4f\n", bounds.minLatitude));
+    writer.write(String.format("Max_Lat=%.4f\n", bounds.maxLatitude));
+    writer.write(String.format("Min_Lon=%.4f\n", bounds.minLongitude));
+    writer.write(String.format("Max_Lon=%.4f\n", bounds.maxLongitude));
+    writer.write(String.format("Inc_Lat=%.3f\n", bounds.latitudeIncrement));
+    writer.write(String.format("Inc_Lon=%.3f\n", bounds.longitudeIncrement));
   }
   
 }

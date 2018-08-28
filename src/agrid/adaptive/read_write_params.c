@@ -12,6 +12,7 @@ void load_poly_data(struct compl_levels* cat_comp)
    FILE *fplst, *fppoly;
    int cnt, cnt1, cnt2, nheaders, years_gap;
    char buff[BUFFLEN], nm_tmp[200];
+   char polygonFilePath[200];
 
    if( (fplst = fopen(cat_comp->catalogGapsFile, "r"))==NULL) {
      fprintf(stderr,"Cannot open file with list of polygons, %s\n", cat_comp->catalogGapsFile);
@@ -22,8 +23,10 @@ void load_poly_data(struct compl_levels* cat_comp)
    cnt=0;
    while(fgets(buff,BUFFLEN,fplst) ) {
      sscanf(buff,"%s %d %d", nm_tmp, &years_gap, &nheaders);
-     if( (fppoly  = fopen(nm_tmp, "r"))==NULL) {
-       fprintf(stderr,"Cannot open polygon file, %s\n", nm_tmp);
+     sprintf(polygonFilePath, "%s/%s", cat_comp->catalogGapsPolygonPath, nm_tmp);
+
+     if( (fppoly  = fopen(polygonFilePath, "r"))==NULL) {
+       fprintf(stderr, "Cannot open polygon file, %s\n", polygonFilePath);
        exit(1);
      }
      for(cnt1=0; cnt1<nheaders; cnt1++) fgets(buff,BUFFLEN,fppoly);
@@ -196,6 +199,7 @@ int read_params_new(char *parf, struct compl_levels* cat_comp, struct boundaries
   Parse_Text(fpparam, "Catalog_Gaps",'i', &(cat_comp->catalogGaps) );
   if ( (cat_comp->catalogGaps) == 1 ) {
     Parse_Text(fpparam, "Catalog_Gaps_File",'s', &(cat_comp->catalogGapsFile) );
+    Parse_Text(fpparam, "Polygons_for_Gaps_Path", 's', &(cat_comp->catalogGapsPolygonPath));
     load_poly_data(cat_comp);
   }
   Parse_Text(fpparam, "N_Completeness_Levels",'i', &(cat_comp->nlevels) );

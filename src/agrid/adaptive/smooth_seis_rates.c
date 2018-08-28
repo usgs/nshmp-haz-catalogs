@@ -61,7 +61,10 @@ float check_earthquake_catalog_gaps(struct eqcat* eqcatp, struct compl_levels* c
       plat[cnt1]=cat_compp->polygons.elem[cnt].lat[cnt1];
     }
     if ( lxyint_(&eqlon,&eqlat,plon,plat,&np) ) { 
-      fprintf(stderr,"EQ-reduced-time-for-rate: %.3f %.3f %d %d %d %f %d\n", eqlon, eqlat, eqyr, eqmon, eqday, eqmag, eqlineno);
+      fprintf(
+          stderr,
+          "EQ-reduced-time-for-rate: %8.3f %8.3f %6d %4d %4d %8.4f %6d\n",
+          eqlon, eqlat, eqyr, eqmon, eqday, eqmag, eqlineno);
       return nyrs;
     }
   }
