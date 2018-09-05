@@ -1,12 +1,12 @@
-package agrid;
+package gov.usgs.earthquake.catalog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 
-import agrid.config.AgridConfig;
-import agrid.config.FixedConfig;
+import gov.usgs.earthquake.catalog.config.AgridConfig;
+import gov.usgs.earthquake.catalog.config.FixedConfig;
 
 public class CEUSFixedCalc {
   private static final String USAGE_COMMAND = AgridUtils.JAVA_COMMAND + 

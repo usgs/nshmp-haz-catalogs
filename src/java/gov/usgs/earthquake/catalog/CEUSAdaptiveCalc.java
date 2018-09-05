@@ -1,13 +1,13 @@
-package agrid;
+package gov.usgs.earthquake.catalog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 
-import agrid.config.AdaptiveConfig;
-import agrid.config.AgridConfig;
-import agrid.config.WriteAdaptiveFiles;
+import gov.usgs.earthquake.catalog.config.AdaptiveConfig;
+import gov.usgs.earthquake.catalog.config.AgridConfig;
+import gov.usgs.earthquake.catalog.config.WriteAdaptiveFiles;
 
 public class CEUSAdaptiveCalc {
   private static final String USAGE_COMMAND = AgridUtils.JAVA_COMMAND + 

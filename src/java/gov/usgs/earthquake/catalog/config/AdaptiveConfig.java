@@ -1,4 +1,4 @@
-package agrid.config;
+package gov.usgs.earthquake.catalog.config;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import agrid.AgridModel.AgridProperties;
-import agrid.AgridUtils;
+import gov.usgs.earthquake.catalog.AgridModel.AgridProperties;
+import gov.usgs.earthquake.catalog.AgridUtils;
 
 public class AdaptiveConfig {
   public final AdaptiveSmoothing adaptiveSmoothing;

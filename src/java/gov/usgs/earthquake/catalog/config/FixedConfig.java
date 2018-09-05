@@ -1,4 +1,4 @@
-package agrid.config;
+package gov.usgs.earthquake.catalog.config;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

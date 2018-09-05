@@ -1,4 +1,4 @@
-package agrid;
+package gov.usgs.earthquake.catalog;
 
 import java.io.IOException;
 import java.nio.file.Files;
