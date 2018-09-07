@@ -1,4 +1,4 @@
-package agrid.config;
+package gov.usgs.earthquake.catalog.config;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -6,12 +6,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import agrid.AgridModel;
-import agrid.AgridUtils;
-import agrid.config.AdaptiveConfig.AdaptiveSmoothing;
-import agrid.config.AdaptiveConfig.Completeness;
-import agrid.config.AdaptiveConfig.Smoothing;
-import agrid.config.CatalogConfig.SourceBoundaries;
+import gov.usgs.earthquake.catalog.AgridModel;
+import gov.usgs.earthquake.catalog.AgridUtils;
+import gov.usgs.earthquake.catalog.config.AdaptiveConfig.AdaptiveSmoothing;
+import gov.usgs.earthquake.catalog.config.AdaptiveConfig.Completeness;
+import gov.usgs.earthquake.catalog.config.AdaptiveConfig.Smoothing;
+import gov.usgs.earthquake.catalog.config.CatalogConfig.SourceBoundaries;
 
 public class WriteAdaptiveFiles {
   static final String FILE_NAME = "agridParameters.in";

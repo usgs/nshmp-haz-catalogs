@@ -1,9 +1,9 @@
-package agrid;
+package gov.usgs.earthquake.catalog;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-import agrid.config.AgridConfig;
+import gov.usgs.earthquake.catalog.config.AgridConfig;
 
 public class CEUSAgridCalc {
   private static final String USAGE_COMMAND = AgridUtils.JAVA_COMMAND + 

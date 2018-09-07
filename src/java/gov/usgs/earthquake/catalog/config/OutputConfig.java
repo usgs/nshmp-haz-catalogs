@@ -1,10 +1,10 @@
-package agrid.config;
+package gov.usgs.earthquake.catalog.config;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import agrid.AgridUtils;
+import gov.usgs.earthquake.catalog.AgridUtils;
 
 public class OutputConfig {
   public final String adaptiveFile;

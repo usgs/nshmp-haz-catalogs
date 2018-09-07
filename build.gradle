@@ -21,10 +21,12 @@ dependencies {
 sourceSets {
   main {
     java {
-      srcDirs = ['src']
+      srcDirs = ['src/java']
     }
   }
 }
+
+mainClassName = 'gov.usgs.earthquake.catalog.CEUSAgridCalc'
 
 ext {
   etcDir = "${projectDir}/etc"
@@ -34,7 +36,7 @@ ext {
   adaptiveExePath = "${exeDir}/adaptiveAgrid"
   fixedExePath = "${exeDir}/fixedAgrid"
   
-  agridPropsPath = "${buildDir}/classes/java/main/agrid/config.properties"
+  agridPropsPath = "${sourceSets.main.java.getOutputDir()}/gov/usgs/earthquake/catalog/config.properties"
 }
 
 jar {
@@ -59,8 +61,6 @@ jar {
     props.store(propsFile.newWriter(), null)
   }
 }
-
-mainClassName = 'agrid.CEUSAgridCalc'
 
 task make(type: Exec) {
   commandLine 'make'

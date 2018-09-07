@@ -1,4 +1,4 @@
-package agrid;
+package gov.usgs.earthquake.catalog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-import agrid.config.AgridConfig;
+import gov.usgs.earthquake.catalog.config.AgridConfig;
 
 public class AgridModel {
   public final Path adaptiveExePath;

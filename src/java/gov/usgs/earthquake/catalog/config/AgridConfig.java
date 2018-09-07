@@ -1,4 +1,4 @@
-package agrid.config;
+package gov.usgs.earthquake.catalog.config;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import agrid.AgridModel.AgridProperties;
+import gov.usgs.earthquake.catalog.AgridModel.AgridProperties;
 
 public class AgridConfig {
   static final Gson GSON; 
